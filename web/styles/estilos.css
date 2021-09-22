@@ -1,0 +1,100 @@
+body{
+    background-color: #f0fff0; 
+    z-index: -1;
+}
+
+button {
+  color: black;
+  background: white;
+  transition: background 0.4s;
+}
+
+button:hover,
+button:focus {
+  background: #d3d8ec;
+}
+   
+.error{
+    color: red;
+    font-style: italic;
+} 
+ .cabecalho {
+  font-size: 20px;
+  align-content: center;
+  color: #f0fff0;
+  font-weight: lighter;
+  width: 35%;
+  padding: 5px;
+  
+ }
+ header {
+  background-color: #f0fff0;
+  margin: 1px;
+  padding: 1px; 
+  text-align: center;
+  font-size: 19px;
+  color: black;
+  font-family: calibri;
+  
+}
+
+footer {
+  background-color: #f0fff0;
+  padding: 8px;
+  text-align: left;
+  color: black;
+ font-family: calibri;
+}
+
+.validacampos { 
+  margin: 20px;
+  font-size: 12px;
+  color: crimson;
+  font-weight: bold;
+}
+ 
+            input[type=checkbox]{
+                display: block;
+                position: absolute;
+                margin-left: 130px;                
+            }
+            
+            input[type=button],[type=reset]{
+                display: block;
+                width: 100px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+            }
+            
+            input[type=text]:focus{
+                background-color: white;    
+            }
+            
+            input[type=text],[type=password],[type=date], select{
+                position: relative;
+                background-color: silver;
+                margin-left: 200px; 
+                width: 250px;                                
+            }
+            label{
+                display: block;
+                position: absolute;
+                margin-left: 10px;                 
+            }
+            
+            div{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 400px;
+                border: black 2px;
+                margin-bottom: 10px;
+                padding: 20px;
+            }
+            
+.validacampos { 
+  font-size: 12px;
+  color: crimson;
+  font-weight: bold;
+}
