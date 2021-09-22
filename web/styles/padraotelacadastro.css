@@ -1,0 +1,402 @@
+/* CSS reset */
+*, *:before, *:after { 
+  margin:0;
+  padding:0;
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+}
+.caixaalta {
+    text-transform: uppercase;
+}
+.cabecalho {
+  font-size: 12px;
+  align-content: center;
+  color: crimson;
+  font-weight: bold;
+  width: 35%;
+  padding: 2px;
+}
+
+.validacampos { 
+  font-size: 12px;
+  color: crimson;
+  font-weight: bold;
+}
+/* aqui pode ir criando "classes" para cada campo */
+
+/*                         FUNCIONARIO         */
+.codpaciente {
+    width: 5%;
+}
+.nomepaciente {
+    width: 70%; 
+}
+.nomepaciente1 {
+    width: 100%;
+}
+.datanasc {
+    width: 23%;
+}
+.foneemergencia {
+    width: 13%;
+}
+.fonecontato {
+    width: 13%;
+}
+.nomeresponsavel {
+    width: 67%;
+}
+.descanamnese {
+    width:  100%; 
+}
+
+/*                          CLINICO            */
+.codclinico {
+    width: 10%;
+}
+.nomeclinico {
+    width: 65%;
+}
+.descespecialidade{
+    width: 65%;
+}
+   
+.foneclinico{
+    width: 18%;
+}
+
+/*                          PRESCRICAO   */
+
+.nrprescricao {
+    width: 8%;
+}
+.descmedicamento {
+    width: 65%;
+}
+.dataprescricao{
+    width: 25%;
+}
+.codintervalo{
+    width: 5%;
+}
+.descdosagem{
+    width: 35%;
+}
+
+/*                          CUIDADOR     */
+
+.codcuidador {
+    width: 10%;
+}
+.nomecuidador {
+    width:  66%;
+}
+.fonecuidador {
+    width:  18%;
+}
+.dataadmissao {
+    width: 25%;
+}
+.datadesliga {
+    width: 25%;
+}
+
+/*                           MATERIAIS       */
+
+.codmaterial {
+    width: 8%;
+}
+.nomematerial {
+    width: 51%;
+}
+.qtdeestoque {
+    width: 30%;
+}
+.qtdeestqalerta {
+    width: 20%;
+}
+.nomefornecedor {
+    width: 51%;
+}
+
+/*                          UNIDADES DE MEDIDA   */
+.codunidmed {
+    width: 18%;
+}
+.descunidmed {
+    width: 45%;
+}
+
+/*                           FORNECEDOR */
+
+.codpaciente {
+    width: 10%;
+}
+.codfornecedor {
+    width: 10%;
+}
+.nomefornecedor {
+    width: 60%;
+}
+.fonefornecedor {
+    width: 20%;
+}
+.emailfornecedor {
+    width: 75%;
+}
+.nomecontato {
+    width: 40%;
+}
+
+/*                           EVENTO */
+
+.codpaciente {
+    width: 10%;
+}
+
+.nrevento {
+    width: 5%;
+}
+
+.qtdduracaodias {
+    width: 10%;
+}
+
+.descrevento {
+    width: 60%;
+}
+.statusevento {
+    width: 15%;
+}
+.datafinal {
+    width: 35%;
+}
+.horafinal {
+    width: 25%;
+}
+
+/* FINANCA */
+
+.datalancamento {
+    width: 10%;
+}
+.codcategoria {
+    width:  66%;
+}
+.vlrlancto {
+    width:  18%;
+}
+.dataadmissao {
+    width: 25%;
+}
+.datadesliga {
+    width: 25%;
+}
+
+/* remove a linha dos links */
+a{
+  text-decoration: none;
+}
+ 
+/* esconde as ancoras da tela */
+a.links{
+  display: none;
+}
+.content{
+  width: 800px;
+  min-height: 200px;    
+  margin: 1px auto;
+  position: relative;   
+}
+
+.contentpaciente{
+  width: 800px;
+  min-height: 200px;    
+  margin: 1px auto;
+  bottom: auto;
+  position: relative;   
+}
+
+h1{
+  font-size: 20px;
+  color: rgb(9, 117, 167);
+  padding: 2px 0 10px 0;
+  font-family: Arial,sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+}
+h1:after{
+  content: ' ';
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: 10px;
+  background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+  background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%); 
+}
+
+p{
+  margin-bottom:1px;
+}
+ 
+.content p:first-child{
+  margin: 0px;
+}
+ 
+label{
+  color: #010f11;
+  position: relative;
+}
+/* placeholder */
+::-webkit-input-placeholder  {
+  color: #e73c3c6c; 
+  font-style: italic;
+}
+ 
+input:-moz-placeholder,
+textarea:-moz-placeholder{
+  color: #bebcbc;
+  font-style: italic;
+}
+input {
+  outline: none;
+}
+ 
+/*estilo dos input,  menos o radio */
+input:not([type="radio"]){
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 1px;
+  padding: 2px;    
+  border: 2px solid #b2b2b2;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+ 
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(43, 40, 40, 0.6) inset;
+  box-shadow: 0px 1px 4px 0px rgba(43, 40, 40, 0.6) inset;
+ 
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.link{
+  position: absolute;
+  background: #e1eaeb;
+  color: #7f7c7c;
+  left: 0px;
+  height: 20px;
+  width: 440px;
+  padding: 14px 30px 20px 30px;
+  font-size: 14px;
+  text-align: right;
+  border-top: 1px solid #dbe5e8;
+ 
+  -webkit-border-radius: 0 0  5px 5px;
+  border-radius: 0 0  5px 5px;
+}
+ 
+.link a {
+  font-weight: bold;
+  background: #f7f8f1;
+  padding: 6px;
+  color: rgb(29, 162, 193);
+  margin-left: 10px;
+  border: 1px solid #033f83;
+ 
+  -webkit-border-radius: 4px;
+  border-radius: 4px;  
+ 
+  -webkit-transition: all 0.4s linear;
+  transition: all 0.4s  linear;
+}
+ 
+.link a:hover {
+  color: #39bfd7;
+  background: #f7f7f7;
+  border: 1px solid #4ab3c6;
+}
+#cadastro, 
+#login{
+  position: absolute;
+  top: 0px;
+  width: 88%;   
+  padding: 15px 6% 60px 6%;
+  margin: 0 0 35px 0;
+  background: #f7f7f7;
+  border: 1px solid rgba(147, 184, 189,0.8);
+   
+  -webkit-box-shadow: 5px;
+  border-radius: 5px;
+   
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+ 
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
+
+/* Efeito ao clicar no botão ( Ir para Login ) */
+#paracadastro:target ~ .content #cadastro,
+#paralogin:target ~ .content #login{
+  z-index: 2;
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+ 
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+}
+ 
+/* Efeito ao clicar no botão ( Cadastre-se ) */
+#registro:target ~ .content #login,
+#paralogin:target ~ .content #cadastro{
+  -webkit-animation-name: fadeOutLeft;
+  animation-name: fadeOutLeft;
+}
+/*fadeInLeft*/
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+  75% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+ 
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+ 
+/*fadeOutLeft*/
+@-webkit-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  75% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+}
+ 
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  75% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
