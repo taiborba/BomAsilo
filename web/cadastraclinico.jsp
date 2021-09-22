@@ -14,12 +14,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro Clínico</title>
         <link rel="stylesheet" href="styles/estilos.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
         <script src="scripts/formatacampos.js"></script>
     </head>
      <header>
-            <script src="scripts/cabecalho.js"></script>
              <script>
                 function validaAcesso(p1){
                    if(p1 === ""){
@@ -41,9 +41,7 @@
             System.out.println("Tipo:" + tipoAcesso);            
             out.write("<script>validaAcesso(\"" + tipoAcesso + "\");</script>");  
         %>
-       
         <section>
-          
             <article>
                 <h1>Cadastro de Clínico </h1>
                 <hr /> 
@@ -53,15 +51,13 @@
                             out.write(request.getParameter("pmensagem"));
                     %>
                 </label>
+                
                     <%
                          Especialidade especialidade = new Especialidade();
                         List<Especialidade> esp = especialidade.consultarGeral();
                         %>
-                        
                 <form action="recebedadosclinico.jsp" method="POST">
-                    
                     <div>
-                       
                         <label>Nome Clínico</label>
                         <input id="nomeClinico" type="text" required=requeride name="nomeClinico"/><br />
                         
@@ -75,22 +71,14 @@
                             <option value="<%out.write(""+e.getIdEspecialidade());%>">
                             <% out.write(""+e.getDescEspecialidade()); %></option><%}%>
                         </select> 
+                        <a href="cadastraespecialidade.jsp" target="_blank"> Cadastrar Especialidade </a></br>
 
-                        
                         <input type="button" value="Salvar" onclick="enviarDados()" />
                         <input type="reset" value="Cancelar" onclick="location.href = 'menu.jsp';" />
                     </div>   
                 </form>
-            </p>
             </article>
-                
-                
         </section>
-                
-        <footer>
-            <script src="scripts/rodape.js"></script>
-        </footer> 
-                
 <script>
     function enviarDados(){
             var nomeClinico = document.getElementsByName("nomeClinico");
