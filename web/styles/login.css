@@ -1,0 +1,44 @@
+body {
+background-color: #c2ffc2;
+}
+
+table {
+    margin: auto;
+    margin-top: 5%;
+    border:solid black 1px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    background-color: #f0fff0;
+    padding: 30px;
+    border-spacing: 10px;
+    font-size: 25px;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 1px;
+}
+
+td{
+    text-align: center;
+}
+
+input{
+    border-radius:5px;
+    -moz-border-radius:5px;
+    font-size: 20px
+   }
+
+img{
+  high:75px;
+  width: 75px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+ }
+
+
+
+
