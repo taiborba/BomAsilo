@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="modelos.Prontuario"%>
 <%@page import="java.net.URLEncoder"%>
+<%@page import="java.sql.Date"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,7 +72,9 @@
             p.setDescAlergia(request.getParameter("descAlergia"));
             p.setDescOcupacao(request.getParameter("descOcupacao"));
             p.setCpfPaciente(request.getParameter("cpfPaciente"));
+            p.setDataConsulta(Date.valueOf(request.getParameter("dataConsulta")));
             System.out.println(p);
+            
             if(p.alterarProntuario()){
                 response.setCharacterEncoding("UTF-8");
                 response.sendRedirect("consultaprontuario.jsp?pmensagem=" +URLEncoder.encode("Prontuario editado com sucesso", "UTF-8"));

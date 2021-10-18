@@ -93,13 +93,11 @@
             <div class="dropdown">
                 <a href="logoutEN.jsp" class="active"> Logout <i class='fa-solid fa-house' style='font-size:8px;color:white'></i></a>
             </div>    
-             <a type="button" id="ingles"
-                       onclick="">
-                        <img src="imagens/eua.png" width="24" align="center"/>
+             <a type="button" id="ingles" href="menuEN.jsp">
+                 <img src="imagens/eua.png" width="24" align="center"/></a>
            
-            <a type="button" id="brasil"
-                       onclick=href="menu.jsp">
-                        <img src="imagens/br2.png" width="24" align="center"/>            
+            <a type="button" id="brasil" href="menu.jsp"> 
+                <img src="imagens/br2.png" width="24" align="center"/></a>            
                         
         </div>
         <div class="main">

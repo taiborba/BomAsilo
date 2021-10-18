@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="modelos.Prontuario"%>
 <%@page import="java.net.URLEncoder"%>
+<%@page import="java.sql.Date"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,6 +38,7 @@
         
 <%
     Prontuario p = new Prontuario();
+   
 
     float peso = Float.parseFloat(request.getParameter("peso"));
     float altura = Float.parseFloat(request.getParameter("altura"));
@@ -50,6 +52,7 @@
     p.setImc(imc);
     
     
+    String dataConsulta = request.getParameter("dataConsulta");
     String limitCognitiva = request.getParameter("limitCognitiva");
     if (limitCognitiva != null) {
              p.setLimitCognitiva(true);
@@ -66,10 +69,16 @@
     if (limitAudicao != null) {
              p.setLimitAudicao(true);
     }
+    
+    
     p.setLimitOutras(request.getParameter("limitOutras"));
     p.setDescAlergia(request.getParameter("descAlergia"));
     p.setDescOcupacao(request.getParameter("descOcupacao"));
     p.setCpfPaciente(request.getParameter("cpfPaciente"));
+    p.setDataConsulta    (Date.valueOf(request.getParameter("dataConsulta")));
+    
+    
+    
     if (p.incluirProntuario()) {
             response.sendRedirect("cadastraprontuario.jsp?pmensagem=" +URLEncoder.encode("Prontuario salvo com sucesso", "UTF-8"));
     } else {

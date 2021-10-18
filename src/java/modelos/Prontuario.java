@@ -8,6 +8,7 @@
 package modelos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,11 +31,12 @@ public class Prontuario {
     private float   peso;
     private float   altura;
     private float   imc;
+     private Date dataConsulta;
     private Paciente pacienteProntuario;
 
     @Override
     public String toString() {
-        return "Prontuario{" + "idProntuario=" + idProntuario + "tipoSangue=" + tipoSangue + ", peso=" + peso + ", altura=" + altura + ", imc=" + imc + ", limitCognitiva=" + limitCognitiva + ", limitLocomocao=" + limitLocomocao + ", limitVisao=" + limitVisao + ", limitAudicao=" + limitAudicao + ", limitOutras=" + limitOutras + ", descAlergia=" + descAlergia + ", descOcupacao=" + descOcupacao + ", cpfPaciente=" + cpfPaciente + '}';
+        return "Prontuario{" + "idProntuario=" + idProntuario + "tipoSangue=" + tipoSangue + ", peso=" + peso + ", altura=" + altura + ", imc=" + imc + ", limitCognitiva=" + limitCognitiva + ", limitLocomocao=" + limitLocomocao + ", limitVisao=" + limitVisao + ", limitAudicao=" + limitAudicao + ", limitOutras=" + limitOutras + ", descAlergia=" + descAlergia + ", descOcupacao=" + descOcupacao + ", cpfPaciente=" + cpfPaciente + ", dataConsulta=" + dataConsulta + '}';
     }
     
      public Prontuario(){
@@ -44,8 +46,8 @@ public class Prontuario {
     public boolean incluirProntuario() {
             // declarando comando de execucao do banco de dados
             String sql  = "INSERT INTO prontuario ";
-                   sql += " (tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc)";
-                   sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                   sql += " (tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc, dataConsulta)";
+                   sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             // conectando no banco de dados
             Connection con = Conexao.conectar();
             // 
@@ -63,6 +65,7 @@ public class Prontuario {
                 stm.setFloat(10, this.peso);
                 stm.setFloat(11, this.altura);
                 stm.setFloat(12, this.imc);
+                stm.setDate(13, this.dataConsulta);
                 System.out.println(stm);
                 stm.execute();   
             } catch (SQLException ex) {
@@ -86,7 +89,8 @@ public class Prontuario {
                    sql += "      cpfPaciente    = ?,  ";
                    sql += "      peso           = ?,  ";
                    sql += "      altura         = ?,  ";
-                   sql += "      imc            = ?  ";
+                   sql += "      imc            = ?,  ";
+                   sql += "      dataConsulta   = ?   ";
                    sql += "where idProntuario = ? ";
             // conectando no banco de dados
             Connection con = Conexao.conectar();
@@ -105,7 +109,8 @@ public class Prontuario {
                 stm.setFloat(10, this.peso);
                 stm.setFloat(11, this.altura);
                 stm.setFloat(12, this.imc);
-                stm.setInt(13, this.idProntuario);
+                stm.setDate(13, this.dataConsulta);
+                stm.setInt(14, this.idProntuario);
                 System.out.println(stm);
                 stm.execute();   
             } catch (SQLException ex) {
@@ -136,7 +141,7 @@ public class Prontuario {
 	public Prontuario consultarProntuario(Integer idPront) {
             this.idProntuario = idPront;
             // declarando comando de execucao do banco de dados
-            String  sql  = " select idProntuario, tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc ";
+            String  sql  = " select idProntuario, tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc, dataConsulta ";
                     sql += " from prontuario ";
                     sql += " where idProntuario = ?";
             // conectando no banco de dados
@@ -162,6 +167,7 @@ public class Prontuario {
                    pro.setPeso(rs.getFloat("peso"));
                    pro.setAltura(rs.getFloat("altura"));
                    pro.setImc(rs.getFloat("imc"));
+                   pro.setDataConsulta(rs.getDate("dataConsulta"));
                    System.out.println(stm);
             } 
             } catch (SQLException ex) {
@@ -173,7 +179,7 @@ public class Prontuario {
 	public Prontuario consultarProntuario(String cpfPaciente) {
             this.cpfPaciente = cpfPaciente;
             // declarando comando de execucao do banco de dados
-            String  sql  = " select idProntuario, tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc ";
+            String  sql  = " select idProntuario, tipoSangue, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, peso, altura, imc, dataConsulta ";
                     sql += " from prontuario ";
                     sql += " where cpfPaciente = ?";
             // conectando no banco de dados
@@ -199,6 +205,7 @@ public class Prontuario {
                    pro.setPeso(rs.getFloat("peso"));
                    pro.setAltura(rs.getFloat("altura"));
                    pro.setImc(rs.getFloat("imc"));
+                   pro.setDataConsulta(rs.getDate("dataConsulta"));
                    System.out.println(stm);
             } 
             } catch (SQLException ex) {
@@ -232,6 +239,46 @@ public class Prontuario {
                    pro.setPeso(rs.getFloat("peso"));
                    pro.setAltura(rs.getFloat("altura"));
                    pro.setImc(rs.getFloat("imc"));
+                   pro.setDataConsulta(rs.getDate("dataConsulta"));
+                   lista.add(pro);
+           } 
+        } catch (SQLException ex) {
+          System.out.println("Erro:" + ex.getMessage());
+        }
+        return lista;
+    }
+    
+    
+    public List<Prontuario> consultarProntuarioPaciente(Paciente paciente){
+        this.cpfPaciente = paciente.getCpfPaciente();
+        List<Prontuario> lista = new ArrayList<>();
+        // conectando no banco de dados
+        Connection con = Conexao.conectar();
+        // declarando comando de execucao do banco de dados
+        String  sql  = " select idProntuario, tipoSangue, peso, altura, imc, limitCognitiva, limitLocomocao, limitVisao, limitAudicao, limitOutras, descAlergia, descOcupacao, cpfPaciente, dataConsulta " ;
+                    sql += " from prontuario ";
+                    sql += " where cpfPaciente = ? ";
+        //
+        try {
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, this.cpfPaciente);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Prontuario pro = new Prontuario();
+                   pro.setIdProntuario(rs.getInt("idProntuario"));
+                   pro.setTipoSangue(rs.getString("tipoSangue"));
+                   pro.setLimitCognitiva(rs.getBoolean("limitCognitiva"));
+                   pro.setLimitVisao(rs.getBoolean("limitVisao"));
+                   pro.setLimitAudicao(rs.getBoolean("limitAudicao"));
+                   pro.setLimitLocomocao(rs.getBoolean("limitLocomocao"));
+                   pro.setLimitOutras(rs.getString("limitOutras"));
+                   pro.setDescAlergia(rs.getString("descAlergia"));
+                   pro.setDescOcupacao(rs.getString("descOcupacao"));
+                   pro.setCpfPaciente(rs.getString("cpfPaciente"));
+                   pro.setPeso(rs.getFloat("peso"));
+                   pro.setAltura(rs.getFloat("altura"));
+                   pro.setImc(rs.getFloat("imc"));
+                   pro.setDataConsulta(rs.getDate("dataConsulta"));
                    lista.add(pro);
            } 
         } catch (SQLException ex) {
@@ -350,5 +397,13 @@ public class Prontuario {
 
     public void setPacienteProntuario(Paciente pacienteProntuario) {
         this.pacienteProntuario = pacienteProntuario;
+    }
+    
+     public Date getDataConsulta() {
+        return dataConsulta;
+    }
+
+    public void setDataConsulta(Date dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 }

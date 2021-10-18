@@ -50,7 +50,7 @@
             if (idProntuario != null) {
                 p = p.consultarProntuario(Integer.parseInt(idProntuario));
             }
-            
+
             Paciente paciente = new Paciente();
             List<Paciente> pac = paciente.consultarGeral();
         %>
@@ -72,6 +72,11 @@
                         <option value="<%out.write("" + pa.getCpfPaciente());%>">
                             <% out.write(pa.getNome()); %></option><%}%>
                     </select> 
+                </fieldset>
+
+                <fieldset>
+                    <label>Doctor Appointment Date</label>
+                    <input type="date" name="dataConsulta" value="<%out.write("" + pr.getDataConsulta());%>" />
                 </fieldset>
 
                 <fieldset>
@@ -107,9 +112,9 @@
                 </fieldset>
 
                 <fieldset>
-                <label>Other Limitation</label>
-                <input type="text" name="limitOutras" maxlength="40"
-                       value="<%out.write(p.getLimitOutras());%>" />
+                    <label>Other Limitation</label>
+                    <input type="text" name="limitOutras" maxlength="40"
+                           value="<%out.write(p.getLimitOutras());%>" />
                 </fieldset>
 
                 <fieldset>
@@ -157,7 +162,7 @@
                 </fieldset><br/>
 
                 <input type="submit" value="Edit" onclick="location.href = 'consultaprontuarioEN.jsp';"/>
-                    <input type="reset" value="Cancel" onclick="location.href = 'consultaprontuarioEN.jsp';" />
+                <input type="reset" value="Cancel" onclick="location.href = 'consultaprontuarioEN.jsp';" />
             </form>
     </body>                     
 </html>

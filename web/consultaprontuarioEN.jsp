@@ -45,22 +45,26 @@
     %>
     <table class="table table-striped">
         <thead>
-        <th scope="col"> Blood Type </th>
-        <th scope="col"> Weight </th>
-        <th scope="col"> Height </th>
-        <th scope="col"> BMI </th>
-        <th scope="col"> Cognitive Limitation </th>
-        <th scope="col"> Locomotive Limitation </th>
-        <th scope="col"> Visual Limitation </th>
-        <th scope="col"> Auditory Limitation </th>
-        <th scope="col"> Other Limitation </th>
-        <th scope="col"> Allergy </th>
-        <th scope="col"> Occupation </th>
-        <th scope="col"> Patient </th>
-    </thead>
+        <th scope="col">Doctor Appointment Date</th>
+        <th scope="col">Blood Type </th>
+        <th scope="col">Weight </th>
+        <th scope="col">Height </th>
+        <th scope="col">BMI </th>
+        <th scope="col">Cognitive Limitation </th>
+        <th scope="col">Locomotive Limitation </th>
+        <th scope="col">Visual Limitation </th>
+        <th scope="col">Auditory Limitation </th>
+        <th scope="col">Other Limitation </th>
+        <th scope="col">Allergy </th>
+        <th scope="col">Occupation </th>
+        <th scope="col"> Edit </th>
+        <th scope="col"> Delete </th>
+        <th scope="col">Patient </th>
+        </thead>
     <tbody>
         <% for (Prontuario pr : prontuario) { %>
         <tr>
+            <td><% out.write("" + pr.getDataConsulta());   %></td>
             <td><% out.write(pr.getTipoSangue());  %></td>
             <td><% out.write("" + pr.getPeso()); %></td>
             <td><% out.write("" + pr.getAltura()); %></td>

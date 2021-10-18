@@ -76,6 +76,11 @@
                 </fieldset>
 
                 <fieldset>
+                    <label>Data da Consulta</label>
+                    <input type="date" name="dataConsulta" value="<%out.write("" + p.getDataConsulta());%>" />
+                </fieldset>
+
+                <fieldset>
                     <label>Tipo Sanguineo</label>
                     <input type="text"  name="tiposangue" maxlength="3" 
                            value="<%out.write(p.getTipoSangue());%>"/>
@@ -108,9 +113,9 @@
                 </fieldset>
 
                 <fieldset>
-                <label>Outra Limitação</label>
-                <input type="text" name="limitOutras" maxlength="40"
-                       value="<%out.write(p.getLimitOutras());%>" />
+                    <label>Outra Limitação</label>
+                    <input type="text" name="limitOutras" maxlength="40"
+                           value="<%out.write(p.getLimitOutras());%>" />
                 </fieldset>
 
                 <fieldset>
@@ -158,7 +163,7 @@
                 </fieldset><br/>
 
                 <input type="submit" value="Alterar" onclick="location.href = 'consultaprontuario.jsp';"/>
-                    <input type="reset" value="Cancelar" onclick="location.href = 'consultaprontuario.jsp';" />
+                <input type="reset" value="Cancelar" onclick="location.href = 'consultaprontuario.jsp';" />
             </form>
     </body>                     
 </html>

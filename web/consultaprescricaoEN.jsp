@@ -56,9 +56,9 @@
         %>
         <table class="table table-striped">
             <thead>
+            <th scope="col">Doctor Appointment Date</th>
             <th scope="col">Doctor</th>
             <th scope="col">Medicine</th>
-            <th scope="col">Doctor Appointment Date</th>
             <th scope="col">Doctor Appointment Time</th>
             <th scope="col">Orientation Description</th>
             <th scope="col">Posology Description</th>
@@ -69,10 +69,10 @@
         <tbody>
             <% for (Prescricao p : prescricao) { %>
             <tr>
-                    <td><% out.write("" + p.getClinicoPrescricao().getNomeClinico() + " - "
+                <td><% out.write("" + p.getDataConsulta());   %></td>
+                <td><% out.write("" + p.getClinicoPrescricao().getNomeClinico() + " - "
                                     + p.getClinicoPrescricao().getEspecialidadeClinico().getDescEspecialidade());%></td>
                 <td><% out.write("" + p.getMedicamentoPrescricao().getNomeMedicamento());   %></td>
-                <td><% out.write("" + p.getDataConsulta());   %></td>
                 <td><% out.write("" + p.getHoraConsulta());  %></td>
                 <td><% out.write("" + p.getDescOrientacao());  %></td>
                 <td><% out.write("" + p.getDescPosologia());  %></td>

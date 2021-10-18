@@ -60,12 +60,9 @@
             Rotina rot = new Rotina();
             Familiar familiar = new Familiar();
             Paciente paciente = new Paciente();
-           
-        %>
-        
-         <%
+      
          
-        List<Rotina> rotina = rot.consultarRotinaPaciente(paciente.consultarPaciente(familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()));
+            List<Rotina> rotina = rot.consultarRotinaPaciente(paciente.consultarPaciente(familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()));
        
         %>
     

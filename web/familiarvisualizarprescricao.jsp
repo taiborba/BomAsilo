@@ -5,31 +5,33 @@
 * EQUIPE: EDUARDA STEFFEN, LUCAS RAFAEL BOOZ, TAINARA DA SILVA BORBA, LEONARDO LUIZ MOREIRA PINHEIRO      *
 ***********************************************************************************************************
 -->
-<%@page import="modelos.Prescricao"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.List"%>
-<%@page import="modelos.Paciente"%>
+<%@page import="modelos.Prescricao"%>
+<%@page import="modelos.Clinico"%>
+<%@page import="modelos.Medicamento"%>
 <%@page import="modelos.Familiar"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="modelos.Paciente"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="styles/estilos.css">
-        <!--        
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
-        -->
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
         <script src="scripts/formatacampos.js"></script>
     </head>
     <header>
-        <script>
+       <script>
             function validaAcesso(p1) {
                 if (p1 === "") {
                     alert("Realize o acesso!");
                     window.top.location.href = "index.html";
                 } else if (p1 !== "familiar") {
-                    alert("VocÃª nÃ£o possui acesso a esta pÃ¡gina!");
+                    alert("Você não possui acesso a esta página!");
                     window.top.location.href = "menufamiliar.jsp";
                 }
             }
@@ -45,80 +47,57 @@
             out.write("<script>validaAcesso(\"" + tipoAcesso + "\");</script>");
         %>
 
-        <%            
-            String usuarioLogado = "";
+        <h1>Relatório de Prescrições</h1>
+        <hr />
+        <%
+        String usuarioLogado = "";
 
-            if (session.getAttribute("usuarioLogado") != null) {
-                usuarioLogado = session.getAttribute("usuarioLogado").toString();
-            }
+        if (session.getAttribute("usuarioLogado") != null) {
+            usuarioLogado = session.getAttribute("usuarioLogado").toString();
+        }
         %>
 
-        <%            
+        <%
             Prescricao pre = new Prescricao();
-            Paciente paciente = new Paciente();
             Familiar familiar = new Familiar();
-            pre = pre.consultarPrescricao(
-                    paciente.consultarPaciente(
-                            familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()));
-        %>
+            Paciente paciente = new Paciente();
         
-        
-
-        <label>
-            <%
-                if (request.getParameter("pmensagem") != null) {
-                    out.write(request.getParameter("pmensagem"));
+            List<Prescricao> prescricao = pre.consultarPrescricaoPaciente(paciente.consultarPaciente(familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()));
+         %>
+        <table class="table table-striped">
+            <thead>
+            <th scope="col">Data Consulta</th>
+            <th scope="col">Clinico</th>
+            <th scope="col">Medicamento</th>
+            <th scope="col">Hora Consulta</th>
+            <th scope="col">Descrição Orientação</th>
+            <th scope="col">Descrição Posologia</th>
+            <th scope="col">Paciente</th>
+        </thead>
+        <tbody>
+            <% for (Prescricao p : prescricao) { %>
+             <%
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataConsulta = "";
+                   if (p.getDataConsulta() != null) {
+                    dataConsulta = sdf.format(p.getDataConsulta());
                 }
             %>
-        </label>
-
-        <div class="container">
-            <form method="POST" id="bomasilo" action="">
-                <h3>Visualizar PrescriÃ§Ã£o</h3><br/>
-                   <% if (pre != null) { %>
-                <fieldset>
-                    <label> Paciente: 
-                        <td><% out.write(pre.getPacientePrescricao().getCpfPaciente() + " - " + pre.getPacientePrescricao().getNome()); %></td>
-                    </label>
-                </fieldset>
-
-                <fieldset>
-                    <label> Clinico: 
-                        <td><% out.write(pre.getClinicoPrescricao().getNomeClinico()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> Data da Consulta: 
-                        <%
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                            String dataCons = sdf.format(pre.getDataConsulta());
-                        %>
-                        <td><% out.write(dataCons); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> Hora da Consulta: 
-                        <td><% out.write("" + pre.getHoraConsulta()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> DescriÃ§Ã£o da OrientaÃ§Ã£o: 
-                        <td><%out.write("" + pre.getDescOrientacao());%> </td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> DescriÃ§Ã£o da Posologia:
-                        <td><%out.write("" + pre.getDescPosologia());%> </td> </label>
-                </fieldset>
-
-                <fieldset>
-                    <label> Medicamento: 
-                        <td><% out.write(pre.getMedicamentoPrescricao().getNomeMedicamento());%></td</label>
-                </fieldset><br />
-
-                <input type="reset" value="Voltar" onclick="window.top.location.href = 'menufamiliar.jsp';" /><br />  
-                 <%}%>
-            </form>
-        </div>   
-    </body>                    
+            <tr>
+                <td><% out.write(dataConsulta); %></td>
+                <td><% out.write("" + p.getClinicoPrescricao().getNomeClinico() + " - "
+                                    + p.getClinicoPrescricao().getEspecialidadeClinico().getDescEspecialidade());%></td>
+                <td><% out.write("" + p.getMedicamentoPrescricao().getNomeMedicamento());   %></td>
+                <td><% out.write("" + p.getHoraConsulta());  %></td>
+                <td><% out.write("" + p.getDescOrientacao());  %></td>
+                <td><% out.write("" + p.getDescPosologia());  %></td>
+                <td><% out.write(p.getCpfPaciente() + " - " + p.getPacientePrescricao().getNome());%></td>
+                                    
+            </tr> 
+            <%}%>
+        </tbody>
+    </table>
+</form> 
+ 
+</body>
 </html>

@@ -70,6 +70,12 @@
                         <a href="cadastrapaciente.jsp" target="_blank"> Cadastrar Paciente </a>
                     </fieldset><br />
 
+                   <fieldset>
+                    <label>Data da Consulta</label>
+                    <input id="dataConsulta" name="dataConsulta" type="date" required="required" min="1900-01-01" max="2999-12-31"/> <br/>
+                    <input id="validadataConsulta" class="validacampos" type="hidden"/>
+                    </fieldset><br />
+                    
                     <fieldset>
                         <label>Tipo Sanguíneo</label>
                         <input type="text"  name="tipoSangue" maxlength="3" />

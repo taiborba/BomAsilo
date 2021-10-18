@@ -8,6 +8,8 @@
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@page import="modelos.Prontuario"%>
 <%@page import="java.util.List"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,22 +47,34 @@
     %>
     <table class="table table-striped">
         <thead>
-        <th scope="col"> Tipo Sanguíneo </th>
-        <th scope="col"> Peso </th>
-        <th scope="col"> Altura </th>
-        <th scope="col"> IMC </th>
-        <th scope="col"> Limitação Cognitiva </th>
-        <th scope="col"> Limitação Locomotiva </th>
-        <th scope="col"> Limitação Visual </th>
-        <th scope="col"> Limitação Auditiva </th>
-        <th scope="col"> Outra Limitação </th>
-        <th scope="col"> Alergia </th>
-        <th scope="col"> Ocupação </th>
-        <th scope="col"> Paciente </th>
+        <th scope="col">Data Consulta</th>
+        <th scope="col">Tipo Sanguíneo </th>
+        <th scope="col">Peso </th>
+        <th scope="col">Altura </th>
+        <th scope="col">IMC </th>
+        <th scope="col">Limitação Cognitiva </th>
+        <th scope="col">Limitação Locomotiva </th>
+        <th scope="col">Limitação Visual </th>
+        <th scope="col">Limitação Auditiva </th>
+        <th scope="col">Outra Limitação </th>
+        <th scope="col">Alergia </th>
+        <th scope="col">Ocupação </th>
+        <th scope="col">Paciente </th>
+        <th scope="col"> Editar </th>
+        <th scope="col"> Excluir </th>
+       
     </thead>
     <tbody>
         <% for (Prontuario pr : prontuario) { %>
+         <%
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataConsulta = "";
+                   if (pr.getDataConsulta() != null) {
+                    dataConsulta = sdf.format(pr.getDataConsulta());
+                }
+            %>
         <tr>
+            <td><% out.write(dataConsulta);  %></td>
             <td><% out.write(pr.getTipoSangue());  %></td>
             <td><% out.write("" + pr.getPeso()); %></td>
             <td><% out.write("" + pr.getAltura()); %></td>
@@ -89,7 +103,7 @@
             <td><% out.write(pr.getDescAlergia()); %></td>
             <td><% out.write(pr.getDescOcupacao()); %></td>
             <td><% out.write("" + pr.getPacienteProntuario().getNome()); %></td>
-              <td><%out.write("<a href=editaprontuario.jsp?idProntuario=" + pr.getIdProntuario() + ">" + "<i class='fas fa-edit' style='color=black'></i>" + "</a>");%></td> 
+            <td><%out.write("<a href=editaprontuario.jsp?idProntuario=" + pr.getIdProntuario() + ">" + "<i class='fas fa-edit' style='color=black'></i>" + "</a>");%></td> 
             <td>
                 <a type="button" id="botaoexcluir"
                    onclick="mostrarExclusao(<%out.write("" + pr.getIdProntuario());%>)">

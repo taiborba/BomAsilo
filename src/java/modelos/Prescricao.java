@@ -170,12 +170,41 @@ public class Prescricao {
     }
       
       
-         public List<Prescricao> consultarGeral(){
+        public List<Prescricao> consultarGeral(){
         List<Prescricao> lista = new ArrayList<>();
         Connection con = Conexao.conectar();
         String sql = " select * from prescricao order by idPrescricao";
         try {
-            PreparedStatement stm = con.prepareStatement(sql);     
+            PreparedStatement stm = con.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+               Prescricao p = new Prescricao();
+               p.setIdPrescricao(rs.getInt("idPrescricao"));
+               p.setIdClinico(rs.getInt("idClinico"));
+               p.setIdMedicamento(rs.getInt("idMedicamento"));
+               p.setDataConsulta(rs.getDate("dataConsulta"));
+               p.setHoraConsulta(rs.getString("horaConsulta"));
+               p.setDescOrientacao(rs.getString("descOrientacao"));
+               p.setDescPosologia(rs.getString("descPosologia"));
+               p.setCpfPaciente(rs.getString("cpfPaciente"));
+               lista.add(p);
+           } 
+        } catch (SQLException ex) {
+          System.out.println("Erro:" + ex.getMessage());
+        }
+        return lista;
+    }
+         
+        public List<Prescricao> consultarPrescricaoPaciente(Paciente paciente){
+        List<Prescricao> lista = new ArrayList<>();
+        this.cpfPaciente = paciente.getCpfPaciente();
+        Connection con = Conexao.conectar();
+        String sql = " select idPrescricao, idClinico, idMedicamento, dataConsulta, horaConsulta, descOrientacao, descPosologia, cpfPaciente ";
+        sql += " from prescricao ";
+        sql += " where cpfPaciente = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(sql); 
+            stm.setString(1, this.cpfPaciente);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                Prescricao p = new Prescricao();

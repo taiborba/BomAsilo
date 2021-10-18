@@ -1,25 +1,25 @@
-<!--
+<!-- 
 ***********************************************************************************************************
 * ENTRA21 - JAVA WEB MATUTINO 2021                                                                        *
 * PROJETO BOM ASILO                                                                                       *
 * EQUIPE: EDUARDA STEFFEN, LUCAS RAFAEL BOOZ, TAINARA DA SILVA BORBA, LEONARDO LUIZ MOREIRA PINHEIRO      *
 ***********************************************************************************************************
 -->
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@page import="modelos.Prontuario"%>
-<%@page import="modelos.Endereco"%>
-<%@page import="modelos.Paciente"%>
 <%@page import="java.util.List"%>
 <%@page import="modelos.Familiar"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="modelos.Paciente"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="styles/estilos.css">
-        <!--
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        -->
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
         <script src="scripts/formatacampos.js"></script>
     </head>
     <header>
@@ -29,118 +29,90 @@
                     alert("Realize o acesso!");
                     window.top.location.href = "index.html";
                 } else if (p1 !== "familiar") {
-                    alert("VocÃª nÃ£o possui acesso a esta pÃ¡gina!");
+                    alert("Você não possui acesso a esta página!");
                     window.top.location.href = "menufamiliar.jsp";
                 }
             }
-        </script>
+        </script> 
     </header>
     <body>
+    <h1>Relatório de Prontuários</h1>
+    <hr />
+   
+    <%
+        String usuarioLogado = "";
+
+        if (session.getAttribute("usuarioLogado") != null) {
+            usuarioLogado = session.getAttribute("usuarioLogado").toString();
+        }
+    %>
+    <%
+        Prontuario pro = new Prontuario();
+        Familiar familiar = new Familiar();
+        Paciente paciente = new Paciente();
+
+        List<Prontuario> prontuario = pro.consultarProntuarioPaciente(paciente.consultarPaciente(familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()));
+    %>
+    <table class="table table-striped">
+        <thead>
+        <th scope="col">Data Consulta</th>
+        <th scope="col"> Tipo Sanguíneo </th>
+        <th scope="col"> Peso </th>
+        <th scope="col"> Altura </th>
+        <th scope="col"> IMC </th>
+        <th scope="col"> Limitação Cognitiva </th>
+        <th scope="col"> Limitação Locomotiva </th>
+        <th scope="col"> Limitação Visual </th>
+        <th scope="col"> Limitação Auditiva </th>
+        <th scope="col"> Outra Limitação </th>
+        <th scope="col"> Alergia </th>
+        <th scope="col"> Ocupação </th>
+        <th scope="col"> Paciente </th>
+    </thead>
+    <tbody>
+        <% for (Prontuario pr : prontuario) { %>
         <%
-            String tipoAcesso = "";
-            if (session.getAttribute("tipoAcesso") != null) {
-                tipoAcesso = session.getAttribute("tipoAcesso").toString();
-            }
-            System.out.println("Tipo:" + tipoAcesso);
-            out.write("<script>validaAcesso(\"" + tipoAcesso + "\");</script>");
-        %>
-
-        <%                String usuarioLogado = "";
-
-            if (session.getAttribute("usuarioLogado") != null) {
-                usuarioLogado = session.getAttribute("usuarioLogado").toString();
-            }
-        %>
-        <%
-            Prontuario prontuario = new Prontuario();
-            Paciente paciente = new Paciente();
-            Familiar familiar = new Familiar();
-            prontuario = prontuario.consultarProntuario(
-                    paciente.consultarPaciente(
-                            familiar.consultarFamiliar(usuarioLogado).getCpfPaciente()).getCpfPaciente());
-        %>
-
-        <label>
-            <%
-                if (request.getParameter("pmensagem") != null) {
-                    out.write(request.getParameter("pmensagem"));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataConsulta = "";
+                   if (pr.getDataConsulta() != null) {
+                    dataConsulta = sdf.format(pr.getDataConsulta());
                 }
             %>
-        </label>
-        <div class="container">
-            <form method="POST" id="bomasilo" action="">
-                <h3>Visualizar ProntuÃ¡rio</h3><br/>
+        <tr>
+            <td><% out.write(dataConsulta);  %></td>
+            <td><% out.write(pr.getTipoSangue());  %></td>
+            <td><% out.write("" + pr.getPeso()); %></td>
+            <td><% out.write("" + pr.getAltura()); %></td>
+            <td><% out.write("" + pr.getImc()); %></td>
+            <td><% if (pr.isLimitCognitiva()) {
+                        out.write("Sim");
+                    } else {
+                        out.write("Não");
+                    } %></td>
+            <td><% if (pr.isLimitLocomocao()) {
+                        out.write("Sim");
+                    } else {
+                        out.write("Não");
+                    } %></td>
+            <td><% if (pr.isLimitVisao()) {
+                        out.write("Sim");
+                    } else {
+                        out.write("Não");
+                    } %></td>
+            <td><% if (pr.isLimitAudicao()) {
+                        out.write("Sim");
+                    } else {
+                        out.write("Não");
+                    } %></td>
+            <td><% out.write("" + pr.getLimitOutras()); %></td>
+            <td><% out.write(pr.getDescAlergia()); %></td>
+            <td><% out.write(pr.getDescOcupacao()); %></td>
+            <td><% out.write("" + pr.getPacienteProntuario().getNome()); %></td>
 
-            <% if (prontuario != null) { %>
-                <fieldset>
-                    <label> Paciente: 
-                        <td><% out.write(prontuario.getPacienteProntuario().getNome() + " - " + prontuario.getCpfPaciente()); %></td></label>
-                </fieldset>
-
-                <fieldset> 
-                    <label> Tipo Sanguineo: 
-                        <td><% out.write(prontuario.getTipoSangue()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> LimitaÃ§Ã£o Cognitiva: 
-                        <td><% out.write("" + prontuario.isLimitCognitiva()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> LimitaÃ§Ã£o Locomotiva:  
-                        <td><% out.write("" + prontuario.isLimitLocomocao()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> LimitaÃ§Ã£o na VisÃ£o: 
-                        <td><%out.write("" + prontuario.isLimitVisao());%> </td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> LimitaÃ§Ã£o Auditiva: 
-                        <td><%out.write("" + prontuario.isLimitAudicao());%> </td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> Outras LimitaÃ§Ãµes: 
-                        <td><% out.write(prontuario.getLimitOutras()); %></td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> Alergia: 
-                        <td><% out.write(prontuario.getDescAlergia()); %></td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> OcupaÃ§Ã£o: 
-                        <td><% out.write(prontuario.getDescOcupacao()); %></td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> Peso: 
-                        <td><% out.write("" + prontuario.getPeso()); %></td></label>
-                </fieldset>
-
-
-                <fieldset>
-                    <label> Altura: 
-                        <td><% out.write("" + prontuario.getAltura()); %></td></label>
-                </fieldset>
-
-                <fieldset>
-                    <label> IMC: 
-                        <td><% out.write("" + prontuario.getImc());%></td></label>
-                </fieldset><br/>
-
-                <input type="reset" value="Voltar" onclick="window.top.location.href = 'menufamiliar.jsp';" /><br />
-             <%}%>
-            </form>
-        </div>
-    </body>
+        </tr> 
+        <%}%>
+    </tbody>
+</table>
+</form> 
+</body>
 </html>

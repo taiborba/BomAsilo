@@ -69,6 +69,11 @@
                         </label>
                         <a href="cadastrapacienteEN.jsp" target="_blank"> Register Patient </a>
                     </fieldset><br />
+                    
+                    <fieldset>
+                        <label>Doctor Appointment Date</label>
+                        <input id="dataConsulta" name="dataConsulta" type="date" required="required" min="1900-01-01" max="2999-12-31"/> <br />
+                    </fieldset><br />
 
                     <fieldset>
                         <label>Blood Type</label>

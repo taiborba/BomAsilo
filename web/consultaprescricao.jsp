@@ -10,6 +10,8 @@
 <%@page import="modelos.Prescricao"%>
 <%@page import="modelos.Clinico"%>
 <%@page import="modelos.Medicamento"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,9 +58,9 @@
         %>
         <table class="table table-striped">
             <thead>
+            <th scope="col">Data Consulta</th>
             <th scope="col">Clinico</th>
             <th scope="col">Medicamento</th>
-            <th scope="col">Data Consulta</th>
             <th scope="col">Hora Consulta</th>
             <th scope="col">Descrição Orientação</th>
             <th scope="col">Descrição Posologia</th>
@@ -68,11 +70,18 @@
         </thead>
         <tbody>
             <% for (Prescricao p : prescricao) { %>
+             <%
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataConsulta = "";
+                   if (p.getDataConsulta() != null) {
+                    dataConsulta = sdf.format(p.getDataConsulta());
+                }
+            %>
             <tr>
-                    <td><% out.write("" + p.getClinicoPrescricao().getNomeClinico() + " - "
+                <td><% out.write(dataConsulta); %></td>
+                <td><% out.write("" + p.getClinicoPrescricao().getNomeClinico() + " - "
                                     + p.getClinicoPrescricao().getEspecialidadeClinico().getDescEspecialidade());%></td>
                 <td><% out.write("" + p.getMedicamentoPrescricao().getNomeMedicamento());   %></td>
-                <td><% out.write("" + p.getDataConsulta());   %></td>
                 <td><% out.write("" + p.getHoraConsulta());  %></td>
                 <td><% out.write("" + p.getDescOrientacao());  %></td>
                 <td><% out.write("" + p.getDescPosologia());  %></td>

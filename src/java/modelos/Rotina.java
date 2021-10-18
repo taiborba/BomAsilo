@@ -32,7 +32,7 @@ public class Rotina {
     
     @Override
     public String toString() {
-        return "Rotina{" + "idEvento=" + idEvento + ", cpfPaciente=" + cpfPaciente + ", dataInicial=" + dataInicial + "dataFinal=" + dataFinal + ", horaInicio=" + horaInicio + ", horaFinal=" + horaFinal + ", descEvento=" + descEvento + ", status=" + status + ", qtdIntervalo=" + qtdIntervalo + ", idPrescricao=" + idPrescricao + '}';
+        return "Rotina{" + "idEvento=" + idEvento + ", cpfPaciente=" + cpfPaciente + ", dataInicial=" + dataInicial + ", dataFinal=" + dataFinal + ", horaInicio=" + horaInicio + ", horaFinal=" + horaFinal + ", descEvento=" + descEvento + ", status=" + status + ", qtdIntervalo=" + qtdIntervalo + ", idPrescricao=" + idPrescricao + '}';
     }
 
    public Rotina() {
